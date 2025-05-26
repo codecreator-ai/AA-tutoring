@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ascend Academics - Professional Tutoring Services</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+            box-shadow: 0 0 30px rgba(0,0,0,0.1);
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            position: relative;
+            z-index: 1;
+            opacity: 0.9;
+        }
+
+        nav {
+            background: #f8f9fa;
+            padding: 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            background: none;
+            border: none;
+            padding: 1rem 2rem;
+            cursor: pointer;
+            font-size: 1rem;
+            color: #666;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-tab:hover {
+            background: #e9ecef;
+            color: #495057;
+        }
+
+        .nav-tab.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+            background: white;
+        }
+
+        .nav-tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .nav-tab:hover::before {
+            left: 100%;
+        }
+
+        main {
+            padding: 3rem 2rem;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-section {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: #6c757d;
+            margin-bottom: 2rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #dee2e6;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+            text-decoration: none;
+            display: inline-block;
+            margin: 1rem 0;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #495057;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .subject-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .subject-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .subject-card:hover {
+            transform: scale(1.05);
+        }
+
+        .testimonial {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 1rem 0;
+            border-left: 5px solid #667eea;
+            position: relative;
+        }
+
+        .testimonial::before {
+            content: '"';
+            font-size: 4rem;
+            color: #667eea;
+            position: absolute;
+            top: -1rem;
+            left: 1rem;
+            opacity: 0.3;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .contact-card {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid #dee2e6;
+        }
+
+        .contact-icon {
+            font-size: 2.5rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .schedule-calendar {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+        }
+
+        .time-slots {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .time-slot {
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid #e9ecef;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .time-slot:hover {
+            border-color: #667eea;
+            background: #f0f2ff;
+        }
+
+        .time-slot.selected {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .stats-section {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 3rem 2rem;
+            margin: 2rem -2rem;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .resource-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .resource-link {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+            text-align: center;
+        }
+
+        .resource-link:hover {
+            transform: translateY(-3px);
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-tab {
+                padding: 0.8rem 1rem;
+                font-size: 0.9rem;
+            }
+            
+            main {
+                padding: 2rem 1rem;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎓 Ascend Academics</h1>
+            <p class="tagline">Elevating Students to Academic Excellence</p>
+        </header>
+
+        <nav>
+            <div class="nav-tabs">
+                <button class="nav-tab active" onclick="showTab('home')">Home</button>
+                <button class="nav-tab" onclick="showTab('about')">About Us</button>
+                <button class="nav-tab" onclick="showTab('services')">Services</button>
+                <button class="nav-tab" onclick="showTab('schedule')">Schedule</button>
+                <button class="nav-tab" onclick="showTab('testimonials')">Testimonials</button>
+                <button class="nav-tab" onclick="showTab('resources')">Resources</button>
+                <button class="nav-tab" onclick="showTab('contact')">Contact</button>
+            </div>
+        </nav>
+
+        <main>
+            <!-- Home Tab -->
+            <div id="home" class="tab-content active">
+                <div class="hero-section">
+                    <h2 class="hero-title">Welcome to Academic Excellence</h2>
+                    <p class="hero-subtitle">Personalized tutoring that helps students reach their full potential</p>
+                    <button class="btn" onclick="showTab('schedule')">Schedule a Session</button>
+                </div>
+
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">👨‍🏫</div>
+                        <h3>Expert Tutors</h3>
+                        <p>Qualified educators with advanced degrees and years of teaching experience</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📚</div>
+                        <h3>All Subjects</h3>
+                        <p>Comprehensive tutoring across math, science, English, history, and more</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⏰</div>
+                        <h3>Flexible Scheduling</h3>
+                        <p>Sessions available when it works for you - evenings, weekends, and holidays</p>
+                    </div>
+                </div>
+
+                <div class="stats-section">
+                    <h3>Our Track Record</h3>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-number">500+</div>
+                            <div>Students Helped</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">95%</div>
+                            <div>Grade Improvement</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">15+</div>
+                            <div>Years Experience</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">4.9⭐</div>
+                            <div>Average Rating</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- About Tab -->
+            <div id="about" class="tab-content">
+                <h2 class="hero-title">About Ascend Academics</h2>
+                
+                <div style="margin: 2rem 0; padding: 2rem; background: #f8f9fa; border-radius: 15px;">
+                    <p style="font-size: 1.1rem; line-height: 1.8; color: #495057;">
+                        Founded in 2024, Ascend Academics is dedicated to helping students achieve their academic goals through personalized, one-on-one tutoring. Our mission is to build confidence, improve understanding, and inspire a love for learning that lasts a lifetime.
+                    </p>
+                </div>
+
+                <div class="form-group">
+                    <label>Business Owner / Founder</label>
+                    <input type="text" placeholder="Enter your name" id="ownerName">
+                </div>
+
+                <div class="form-group">
+                    <label>Years of Experience</label>
+                    <input type="number" placeholder="e.g., 10" id="experience">
+                </div>
+
+                <div class="form-group">
+                    <label>Educational Background</label>
+                    <textarea placeholder="Describe your educational qualifications and certifications" id="education" rows="4"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Teaching Philosophy</label>
+                    <textarea placeholder="Share your approach to tutoring and education" id="philosophy" rows="4"></textarea>
+                </div>
+
+                <button class="btn" onclick="updateAboutInfo()">Update Information</button>
+
+                <div class="feature-grid" style="margin-top: 3rem;">
+                    <div class="feature-card">
+                        <div class="feature-icon">🎯</div>
+                        <h3>Personalized Approach</h3>
+                        <p>Every student learns differently. We tailor our methods to match individual learning styles.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">💡</div>
+                        <h3>Build Understanding</h3>
+                        <p>We don't just help with homework - we ensure students truly understand the concepts.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🚀</div>
+                        <h3>Boost Confidence</h3>
+                        <p>Our supportive environment helps students gain confidence in their abilities.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Services Tab -->
+            <div id="services" class="tab-content">
+                <h2 class="hero-title">Our Tutoring Services</h2>
+                
+                <div class="subject-grid">
+                    <div class="subject-card">
+                        <h3>📊 Mathematics</h3>
+                        <p>Algebra, Geometry, Calculus, Statistics</p>
+                    </div>
+                    <div class="subject-card">
+                        <h3>🔬 Science</h3>
+                        <p>Biology, Chemistry, Physics, Earth Science</p>
+                    </div>
+                    <div class="subject-card">
+                        <h3>📝 English</h3>
+                        <p>Literature, Writing, Grammar, Reading Comprehension</p>
+                    </div>
+                    <div class="subject-card">
+                        <h3>🏛️ History</h3>
+                        <p>World History, US History, Government, Geography</p>
+                    </div>
+                    <div class="subject-card">
+                        <h3>🌍 Languages</h3>
+                        <p>Spanish, French, German, ESL</p>
+                    </div>
+                    <div class="subject-card">
+                        <h3>🎓 Test Prep</h3>
+                        <p>SAT, ACT, AP Exams, State Tests</p>
+                    </div>
+                </div>
+
+                <div style="background: #f8f9fa; padding: 2rem; border-radius: 15px; margin: 2rem 0;">
+                    <h3 style="color: #667eea; margin-bottom: 1rem;">📋 Service Levels</h3>
+                    
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <h4>Elementary (K-5)</h4>
+                            <p><strong>$35/hour</strong></p>
+                            <p>Foundation building, basic concepts, homework help</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4>Middle School (6-8)</h4>
+                            <p><strong>$40/hour</strong></p>
+                            <p>Advanced concepts, study skills, exam preparation</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4>High School (9-12)</h4>
+                            <p><strong>$50/hour</strong></p>
+                            <p>College prep, AP courses, standardized test prep</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin: 2rem 0;">
+                    <h3 style="color: #667eea;">📦 Package Deals</h3>
+                    <p style="margin: 1rem 0;">Save money with our session packages!</p>
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <h4>4-Session Package</h4>
+                            <p>5% Discount</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4>8-Session Package</h4>
+                            <p>10% Discount</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4>12-Session Package</h4>
+                            <p>15% Discount</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Schedule Tab -->
+            <div id="schedule" class="tab-content">
+                <h2 class="hero-title">Schedule Your Session</h2>
+                
+                <div class="schedule-calendar">
+                    <h3 style="color: #667eea; margin-bottom: 1rem;">📅 Book Your Tutoring Session</h3>
+                    
+                    <div class="form-group">
+                        <label>Student Name</label>
+                        <input type="text" placeholder="Enter student's name" id="studentName">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Subject</label>
+                        <select id="subject">
+                            <option value="">Select a subject</option>
+                            <option value="math">Mathematics</option>
+                            <option value="science">Science</option>
+                            <option value="english">English</option>
+                            <option value="history">History</option>
+                            <option value="language">Foreign Language</option>
+                            <option value="test-prep">Test Preparation</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Grade Level</label>
+                        <select id="grade">
+                            <option value="">Select grade level</option>
+                            <option value="elementary">Elementary (K-5)</option>
+                            <option value="middle">Middle School (6-8)</option>
+                            <option value="high">High School (9-12)</option>
+                            <option value="college">College</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Preferred Date</label>
+                        <input type="date" id="preferredDate">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Available Time Slots</label>
+                        <div class="time-slots">
+                            <div class="time-slot" onclick="selectTimeSlot(this)">9:00 AM</div>
+                            <div class="time-slot" onclick="selectTimeSlot(this)">10:00 AM</div>
+                            <div class="time-slot" onclick="selectTimeSlot(this)">11:00 AM</div>
+                            <div class="time-slot" onclick="selectTimeSlot(this)">1:00 PM</div>
+                            <div class="time-slot" onclick="selectTimeSlot(this)">2:00 PM</div>
+                            <div class="time-slot" onclick="selectTimeSlot(this)">3:00 PM</div>
+                            <div class="time-slot" onclick="selectTimeSlot(this)">4:00 PM</div>
+                            <div class="time-slot" onclick="selectTimeSlot(this)">5:00 PM</div>
+                            <div class="time-slot" onclick="selectTimeSlot(this)">6:00 PM</div>
+                            <div class="time-slot" onclick="selectTimeSlot(this)">7:00 PM</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Special Requests or Learning Goals</label>
+                        <textarea placeholder="Tell us about specific topics, learning challenges, or goals" id="specialRequests" rows="3"></textarea>
+                    </div>
+
+                    <button class="btn" onclick="scheduleSession()">Schedule Session</button>
+                </div>
+
+                <div style="background: #f0f2ff; padding: 2rem; border-radius: 15px; margin: 2rem 0;">
+                    <h3 style="color: #667eea;">⏰ Our Availability</h3>
+                    <p><strong>Monday - Friday:</strong> 3:00 PM - 9:00 PM</p>
+                    <p><strong>Saturday:</strong> 9:00 AM - 6:00 PM</p>
+                    <p><strong>Sunday:</strong> 12:00 PM - 6:00 PM</p>
+                    <p style="margin-top: 1rem; font-style: italic;">Sessions can be conducted in-person or online via Zoom.</p>
+                </div>
+            </div>
+
+            <!-- Testimonials Tab -->
+            <div id="testimonials" class="tab-content">
+                <h2 class="hero-title">What Our Students Say</h2>
+                
+                <div class="testimonial">
+                    <p><strong>Sarah M. (Grade 11):</strong> "Thanks to Ascend Academics, I went from struggling with calculus to getting an A in the class! The personalized approach really made the difference."</p>
+                </div>
+
+                <div class="testimonial">
+                    <p><strong>Parents of Jake L. (Grade 8):</strong> "We've seen such improvement in Jake's confidence and grades since starting with Ascend Academics. The tutor really understands how to connect with middle schoolers."</p>
+                </div>
+
+                <div class="testimonial">
+                    <p><strong>Maria R. (Grade 10):</strong> "The SAT prep sessions were incredible. I improved my score by 200 points and got into my dream college!"</p>
+                </div>
+
+                <div class="testimonial">
+                    <p><strong>Tom H. (Grade 6):</strong> "Math used to be my worst subject, but now it's actually fun! My tutor makes everything so much easier to understand."</p>
+                </div>
+
+                <div style="background: #f8f9fa; padding: 2rem; border-radius: 15px; margin: 2rem 0; text-align: center;">
+                    <h3 style="color: #667eea;">Leave Your Review</h3>
+                    <div class="form-group">
+                        <input type="text" placeholder="Your name" id="reviewName">
+                    </div>
+                    <div class="form-group">
+                        <textarea placeholder="Share your experience with Ascend Academics" id="reviewText" rows="4"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Rating</label>
+                        <select id="rating">
+                            <option value="5">⭐⭐⭐⭐⭐ (5 stars)</option>
+                            <option value="4">⭐⭐⭐⭐ (4 stars)</option>
+                            <option value="3">⭐⭐⭐ (3 stars)</option>
+                            <option value="2">⭐⭐ (2 stars)</option>
+                            <option value="1">⭐ (1 star)</option>
+                        </select>
+                    </div>
+                    <button class="btn" onclick="submitReview()">Submit Review</button>
+                </div>
+            </div>
+
+            <!-- Resources Tab -->
+            <div id="resources" class="tab-content">
+                <h2 class="hero-title">Student Resources</h2>
+                
+                <div class="resource-links">
+                    <a href="#" class="resource-link">
+                        <h3>📚 Study Guides</h3>
+                        <p>Comprehensive guides for all subjects</p>
+                    </a>
+                    <a href="#" class="resource-link">
+                        <h3>🧮 Math Practice</h3>
+                        <p>Interactive math problems and solutions</p>
+                    </a>
+                    <a href="#" class="resource-link">
+                        <h3>📝 Writing Center</h3>
+                        <p>Essays tips and grammar resources</p>
+                    </a>
+                    <a href="#" class="resource-link">
+                        <h3>🔬 Science Labs</h3>
+                        <p>Virtual experiments and simulations</p>
+                    </a>
+                    <a href="#" class="resource-link">
+                        <h3>📊 Test Prep</h3>
+                        <p>Practice tests and prep materials</p>
+                    </a>
+                    <a href="#" class="resource-link">
+                        <h3>🎯 Study Tips</h3>
+                        <p>Effective study strategies and techniques</p>
+                    </a>
+                </div>
+
+                <div style="background: #f8f9fa; padding: 2rem; border-radius: 15px; margin: 2rem 0;">
+                    <h3 style="color: #667eea;">📖 Featured Resources</h3>
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <h4>📱 Mobile Apps</h4>
+                            <p>Recommended educational apps for on-the-go learning</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4>🌐 Online Tools</h4>
+                            <p>Free websites and platforms for extra practice</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4>📺 Video Tutorials</h4>
+                            <p>Curated video content for visual learners</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 2rem; border-radius: 15px; margin: 2rem 0;">
+                    <h3>📧 Resource Newsletter</h3>
+                    <p>Get weekly study tips, practice problems, and educational resources delivered to your inbox!</p>
+                    <div style="margin: 1rem 0;">
+                        <input type="email" placeholder="Enter your email" style="padding: 0.8rem; border-radius: 5px; border: none; width: 70%; margin-right: 1rem;">
+                        <button class="btn" style="background: white; color: #667eea;">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Tab -->
+            <div id="contact" class="tab-content">
+                <h2 class="hero-title">Contact Us</h2>
+                
+                <div class="contact-info">
+                    <div class="contact-card">
+                        <div class="contact-icon">📧</div>
+                        <h3>Email</h3>
+                        <p>info@ascendacademics.com</p>
+                        <p>hello@ascendacademics.com</p>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-icon">📱</div>
+                        <h3>Phone</h3>
+                        <p>(555) 123-TUTOR</p>
+                        <p>(555) 123-8886</p>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-icon">📍</div>
+                        <h3>Location</h3>
+                        <p>Serving the Bay Area</p>
+                        <p>In-person & Online Sessions</p>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-icon">🕒</div>
+                        <h3>Hours</h3>
+                        <p>Mon-Fri: 3PM-9PM</p>
+                        <p>Weekends: 9AM-6PM</p>
+                    </div>
+                </div>
+
+                <div style="background: #f8f9fa; padding: 2rem; border-radius: 15px; margin: 2rem 0;">
+                    <h3 style="color: #667eea; margin-bottom: 1rem;">📝 Send Us a Message</h3>
+                    
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" placeholder="Your full name" id="contactName">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" placeholder="your.email@example.com" id="contactEmail">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Phone</label>
+                        <input type="tel" placeholder="(555) 123-4567" id="contactPhone">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Subject</label>
+                        <select id="contactSubject">
+                            <option value="">Select a topic</option>
+                            <option value="scheduling">Scheduling a Session</option>
+                            <option value="pricing">Pricing Information</option>
+                            <option value="subjects">Available Subjects</option>
+                            <option value="online">Online Tutoring</option>
+                            <option value="group">Group Sessions</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Message</label>
+                        <textarea placeholder="Tell us how we can help you succeed!" id="contactMessage" rows="5"></textarea>
+                    </div>
+
+                    <button class="btn" onclick="sendMessage()">Send Message</button>
+                </div>
+
+                <div style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 2rem; border-radius: 15px; margin: 2rem 0; text-align: center;">
+                    <h3>🚀 Ready to Get Started?</h3>
+                    <p>Contact us today for a free consultation and let's create a personalized learning plan for academic success!</p>
+                    <button class="btn" style="background: white; color: #667eea; margin-top: 1rem;" onclick="showTab('schedule')">Schedule Free Consultation</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function showTab(tabName) {
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Remove active class from all nav tabs
+            const navTabs = document.querySelectorAll('.nav-tab');
+            navTabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Show selected tab content
+            document.getElementById(tabName).classList.add('active');
+
+            // Add active class to selected nav tab
+            event.target.classList.add('active');
+        }
+
+        function selectTimeSlot(slot) {
+            // Remove selection from other slots
+            const slots = document.querySelectorAll('.time-slot');
+            slots.forEach(s => s.classList.remove('selected'));
+            
+            // Select clicked slot
+            slot.classList.add('selected');
+        }
+
+        function scheduleSession() {
+            const studentName = document.getElementById('studentName').value;
+            const subject = document.getElementById('subject').value;
+            const grade = document.getElementById('grade').value;
+            const date = document.getElementById('preferredDate').value;
+            const selectedSlot = document.querySelector('.time-slot.selected');
+            
+            if (!studentName || !subject || !grade || !date || !selectedSlot) {
+                alert('Please fill in all required fields and select a time slot.');
+                return;
+            }
+            
+            alert(`Session scheduled successfully!\n\nStudent: ${studentName}\nSubject: ${subject}\nGrade: ${grade}\nDate: ${date}\nTime: ${selectedSlot.textContent}\n\nWe'll contact you soon to confirm!`);
+        }
+
+        function updateAboutInfo() {
+            alert('Business information updated successfully!');
+        }
+
+        function submitReview() {
+            const name = document.getElementById('reviewName').value;
+            const review = document.getElementById('reviewText').value;
+            const rating = document.getElementById('rating').value;
+            
+            if (!name || !review) {
+                alert('Please fill in your name and review.');
+                return;
+            }
+            
+            alert(`Thank you for your ${rating}-star review, ${name}! Your feedback helps us improve our services.`);
+            
+            // Clear form
+            document.getElementById('reviewName').value = '';
+            document.getElementById('reviewText').value = '';
+            document.getElementById('rating').value = '5';
+        }
+
+        function sendMessage() {
+            const name = document.getElementById('contactName').value;
+            const email = document.getElementById('contactEmail').value;
+            const message = document.getElementById('contactMessage').value;
+            
+            if (!name || !email || !message) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+            
+            alert(`Thank you for your message, ${name}! We'll get back to you within 24 hours at ${email}.`);
+            
+            // Clear form
+            document.getElementById('contactName').value = '';
+            document.getElementById('contactEmail').value = '';
+            document.getElementById('contactPhone').value = '';
+            document.getElementById('contactSubject').value = '';
+            document.getElementById('contactMessage').value = '';
+        }
+
+        // Set minimum date to today for scheduling
+        document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date().toISOString().split('T')[0];
+            const dateInput = document.getElementById('preferredDate');
+            if (dateInput) {
+                dateInput.min = today;
+            }
+        });
+    </script>
+</body>
+</html>
